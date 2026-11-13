@@ -114,4 +114,47 @@ public class MiListaDoble implements ListInterface {
         // Implementación pendiente
         return null;
     }
+    @Override
+    public boolean insertHead(Object object) {
+        DoubleNode nuevoNodo = new DoubleNode(object);
+        if (isEmpty()) {
+            this.cabeza = nuevoNodo;
+            this.cola = nuevoNodo;
+        } else {
+            nuevoNodo.siguiente = this.cabeza;
+            this.cabeza.anterior = nuevoNodo;
+            this.cabeza = nuevoNodo;
+        }
+        this.size++;
+        return true;
+    }
+
+    @Override
+    public boolean insertTail(Object object) {
+        DoubleNode nuevoNodo = new DoubleNode(object);
+        if (isEmpty()) {
+            this.cabeza = nuevoNodo;
+            this.cola = nuevoNodo;
+        } else {
+            nuevoNodo.anterior = this.cola;
+            this.cola.siguiente = nuevoNodo;
+            this.cola = nuevoNodo;
+        }
+        this.size++;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        if (isEmpty()) return "Lista doblemente enlazada vacía";
+        StringBuilder sb = new StringBuilder();
+        DoubleNode iterador = this.cabeza;
+        sb.append("null <-> ");
+        while (iterador != null) {
+            sb.append("[").append(iterador.dato).append("] <-> ");
+            iterador = iterador.siguiente;
+        }
+        sb.append("null");
+        return sb.toString();
+    }
 }}
