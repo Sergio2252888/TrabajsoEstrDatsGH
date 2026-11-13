@@ -1,13 +1,28 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+public class Main {
+    public static void main(String[] args) {
+        MiListaDoble listaDoble = new MiListaDoble();
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+        System.out.println("1. Inserción:");
+        listaDoble.insertHead(6);
+        listaDoble.insertTail(4);
+        listaDoble.insertTail(1);
+        listaDoble.insertTail(3);
+        System.out.println(listaDoble.toString());
+
+        System.out.println("\n2. Búsqueda y Actualización (set 1 a 0):");
+        DoubleNode nodoUno = listaDoble.search(1);
+        if (nodoUno != null) {
+            listaDoble.set(nodoUno, 0);
+        }
+        System.out.println(listaDoble.toString());
+
+        System.out.println("\n3. Ordenamiento (sortList):");
+        listaDoble.sortList();
+        System.out.println(listaDoble.toString());
+
+        System.out.println("\n4. Eliminación (remove):");
+        DoubleNode nodoCero = listaDoble.search(0);
+        listaDoble.remove(nodoCero);
+        System.out.println(listaDoble.toString());
     }
 }

@@ -114,6 +114,7 @@ public class MiListaDoble implements ListInterface {
         // Implementación pendiente
         return null;
     }
+
     @Override
     public boolean insertHead(Object object) {
         DoubleNode nuevoNodo = new DoubleNode(object);
@@ -157,4 +158,4 @@ public class MiListaDoble implements ListInterface {
         sb.append("null");
         return sb.toString();
     }
-}}
+}
