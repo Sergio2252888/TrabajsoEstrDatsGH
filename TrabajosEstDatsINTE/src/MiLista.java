@@ -151,7 +151,67 @@ public class MiLista implements ListInterface{
 
     @Override
     public MiLista sortList() {
-        return null;
+        if (this.cabeza == null || this.cabeza.siguiente == null) {
+            return this; // Si la lista está vacía o tiene un solo elemento, ya está ordenada
+        }
+
+        boolean intercambiado;
+        do {
+            intercambiado = false;
+            ListNode actual = this.cabeza;
+            ListNode siguiente = this.cabeza.siguiente;
+            ListNode anterior = null;
+
+            while (siguiente != null) {
+
+                Carta cartaActual = (Carta) actual.dato;
+                Carta cartaSiguiente = (Carta) siguiente.dato;
+
+                if (cartaActual.getNumero() > cartaSiguiente.getNumero()) {
+
+                    if (anterior != null) {
+                        anterior.siguiente = siguiente;
+                    } else {
+                        this.cabeza = siguiente;
+                    }
+                    actual.siguiente = siguiente.siguiente;
+                    siguiente.siguiente = actual;
+
+                    anterior = siguiente;
+                    siguiente = actual.siguiente;
+                    intercambiado = true;
+                } else {
+                    anterior = actual;
+                    actual = siguiente;
+                    siguiente = actual.siguiente;
+                }
+            }
+        } while (intercambiado);
+        return this;
+    }
+
+    public void shuffle() {
+        if (this.cabeza == null) return;
+
+        int tamaño = getSize();
+        Object[] temporal = new Object[tamaño];
+
+        ListNode iterador = this.cabeza;
+        for (int i = 0; i < tamaño; i++) {
+            temporal[i] = iterador.dato;
+            iterador = iterador.siguiente;
+        }
+        java.util.Random rnd = new java.util.Random();
+        for (int i = temporal.length - 1; i > 0; i--) {
+            int indice = rnd.nextInt(i + 1);
+            Object temp = temporal[indice];
+            temporal[indice] = temporal[i];
+            temporal[i] = temp;
+        }
+        this.clear();
+        for (Object obj : temporal) {
+            this.insertTail(obj);
+        }
     }
 
     @Override
